@@ -3,18 +3,19 @@
  */
 
  var MongoClient = require('mongodb').MongoClient;
- var DbUrl = 'mongodb://127.0.0.1:27017/productmanage'; //连接数据库
+ var DbUrl = 'mongodb://127.0.0.1:27017/cms'; //连接数据库
 
  var ObjectID = require('mongodb').ObjectID;
 
  function __connectDb(callback){
 
      MongoClient.connect(DbUrl, function(err,db){
-
          if(err){
              console.log(err);
              console.log('数据库连接失败');
              return;
+         } else {
+           console.log('数据库连接成功');
          }
         callback(db);
      })

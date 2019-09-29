@@ -24,16 +24,16 @@ router.get('/add',function(req,res){
 })
 
 //获取表单提交的数据 以及post过来的图片
-router.post('/doAdd',function(req,res){
+router.post('/doAdd', function(req, res){
     //获取表单的数据 以及post传过来的图片
     var form = new multiparty.Form();
     // console.log(222,form);
 
     form.uploadDir = 'upload';  //上传图片保存的地址  目录必须存在
 
-    form.parse(req, function(err,fields,files){
+    form.parse(req, function(err, fields, files){
         //获取提交的数据以及图片上传成功返回的图片信息
-        
+
         // console.log(fields);  /*获取表单的数据*/
         // console.log(files);  /*图片上传成功返回的信息*/
         
@@ -43,13 +43,13 @@ router.post('/doAdd',function(req,res){
         var fee = fields.fee[0];
         var description = fields.description[0];
 
-        DB.insert('product',{
+        DB.insert('product', {
             title: title,
             price: price,
             pic,
             fee,
             description
-        },function(error,data){
+        }, function(error, data){
             if(!error){
                 res.redirect('/admin/product');   //上传成功跳转到列表页
             }

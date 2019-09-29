@@ -24,7 +24,7 @@ app.set('view engine','ejs');
 //配置public目录为我们的静态资源目录
 app.use(express.static('public'));
 //配置虚拟目录
-app.use('/upload',express.static('upload'));
+app.use('/upload', express.static('upload'));
 
 
 app.use('/',index);

@@ -4,7 +4,7 @@ var router = express.Router();
 
 const multiparty = require('multiparty');/*图片上传模块  即可以获取form表单的数据 也可以实现上传图片*/
 
-var DB = require('../../modules/db.js');
+var DB = require('../modules/db.js');
 
 var fs = require('fs');
 
@@ -18,7 +18,7 @@ const axios = require('axios')
 router.get('/',function(req,res){
     DB.find('product',{},function(err,data){
         // console.log(data);
-        res.render('admin/product/index',{
+        res.render('product/index', {
             list: data
         });
     })
@@ -27,7 +27,7 @@ router.get('/',function(req,res){
 //新增商品
 router.get('/add',function(req,res){
     // res.send('新增商品');
-    res.render('admin/product/add');
+    res.render('product/add');
 })
 
 //获取表单提交的数据 以及post过来的图片
@@ -58,7 +58,7 @@ router.post('/doAdd', function(req, res){
             description
         }, function(error, data){
             if(!error){
-                res.redirect('/admin/product');   //上传成功跳转到列表页
+                res.redirect('/product');   //上传成功跳转到列表页
             }
         })
     })
@@ -71,7 +71,7 @@ router.get('/edit',function(req,res){
     DB.find('product',{"_id":new DB.ObjectID(id)},function(error,data){
 
         // console.log(data);
-        res.render('admin/product/edit',{
+        res.render('product/edit',{
             list: data[0]
         });        
     })  
@@ -113,7 +113,7 @@ router.post('/doEdit',function(req,res){
         }
         DB.update('product',{"_id":new DB.ObjectID(_id)},setData,function(err,data){
             if(!err){
-                res.redirect('/admin/product');
+                res.redirect('/product');
             }
         })
     })
@@ -127,7 +127,7 @@ router.get('/delete',function(req,res){
     var id = req.query.id;
     DB.delete('product',{"_id":new DB.ObjectID(id)},function(error,data){
         if(!error){
-            res.redirect('/admin/product');
+            res.redirect('/product');
         }        
     }) 
 })

@@ -4,13 +4,13 @@ var router = express.Router();
 var bodyParser = require('body-parser');
 var md5=require('md5-node'); /*md5加密*/
 
-var DB = require('../../modules/db.js');
+var DB = require('../modules/db.js');
 
 router.use(bodyParser.urlencoded({ extended: false }));
 router.use(bodyParser.json());
 
-router.get('/',function(req,res){
-    res.render('admin/login');
+router.get('/', function(req,res){
+    res.render('login');
 })
 
 // 处理登录的业务逻辑
@@ -22,17 +22,16 @@ router.post('/doLogin', function(req,res){
      * 2.连接数据库查询数据
      */
     
-     DB.find('user',{
+     DB.find('user', {
         username:username,
         password:password
     }, function(err, data){
-         console.log(err)
         if(data.length>0){
-            console.log('登录成功');
+            console.log(data, 111111111111111);
             //保存用户信息
-            req.session.userinfo=data[0];
+            req.session.userinfo = data[0];
 
-            res.redirect('/admin/product');  /*登录成功跳转到商品列表*/
+            res.redirect('/product');  /*登录成功跳转到商品列表*/
 
         }else{
             //console.log('登录失败');
@@ -42,14 +41,14 @@ router.post('/doLogin', function(req,res){
 })
 
 
-router.get('/loginOut',function(req,res){
+router.get('/loginOut', function(req,res){
     //销毁session
     req.session.destroy(function(err){
 
         if(err){
             console.log(err);
         }else{
-            res.redirect('/admin/login');
+            res.redirect('/login');
         }
     })
 })

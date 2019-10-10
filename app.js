@@ -19,16 +19,17 @@ var admin = require('./routers/admin.js');
 var index = require('./routers/index.js');
 
 //使用ejs模板引擎，默认找views这个目录
-app.set('view engine','ejs');
+app.set('view engine', 'ejs');
 
-//配置public目录为我们的静态资源目录
+// 配置public目录为我们的静态资源目录
 app.use(express.static('public'));
-//配置虚拟目录
+// 虚拟目录
 app.use('/upload', express.static('upload'));
 
+app.get('/', function(req, res){
+  res.render('admin/login');
+})
 
-app.use('/',index);
-
-app.use('/admin',admin);
+app.use('/admin', admin);
 
 app.listen(3001, '127.0.0.1', () => console.log('Example app listening on port 3001!'));

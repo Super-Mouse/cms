@@ -21,8 +21,8 @@ router.use(function(req,res,next){
     }
 })
 
-router.use('/login',login);
-router.use('/product',product);
-router.use('/user',user);
+router.use('/login', login);
+router.use('/product', product);
+router.use('/user', user);
 
 module.exports = router;

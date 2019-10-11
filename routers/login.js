@@ -26,7 +26,7 @@ router.post('/doLogin', function(req,res){
         username:username,
         password:password
     }, function(err, data){
-        if(data.length>0){
+        if(data.length > 0){
             console.log(data, 111111111111111);
             //保存用户信息
             req.session.userinfo = data[0];
@@ -44,7 +44,7 @@ router.post('/doLogin', function(req,res){
 router.get('/loginOut', function(req,res){
     //销毁session
     req.session.destroy(function(err){
-
+        console.log(req.session, 33333333333)
         if(err){
             console.log(err);
         }else{

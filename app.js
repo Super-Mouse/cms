@@ -5,11 +5,12 @@ var app = new express();    /**实例化 */
 //保存用户信息
 var session = require('express-session');
 app.use(session({
+    name: 'sessionID',
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
     cookie: {
-        maxAge: 1000*60*30
+        maxAge: 1000*60*30 // 30分钟
     },
     rolling: true
 }))
@@ -28,6 +29,7 @@ app.use(express.static('public'));
 app.use('/upload', express.static('upload'));
 
 app.use(function(req, res, next){
+  console.log(req.session, 22222222222)
   if(req.url === '/login' || req.url === '/login/doLogin'){ /**判断有没有登录 */
     next();
   }else{
